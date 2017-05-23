@@ -24,28 +24,50 @@
   border: 3px;
   border-style: solid;
   border-color: orange;
-  margin-top: 10px;
+  margin-top: 20px;
   position: relative;
   left: 33px;
 }
 
 .timerArea {
+  text-align: center;
   background-color: grey;
   width: 350px;
   height: 50px;
-  margin-bottom: 10px;
   border: 3px;
   border-style: solid;
   border-color: orange;
   position: relative;
-  top: 225px;
-  left: 135px;
+  left: 158px;
+
+}
+.startButton:hover {
+  background-color: yellow;
+}
+
+.startButton {
+  text-align: center;
+  line-height: 80px;
+  background-color: violet;
+  width: 350px;
+  height: 50px;
+  border: 3px;
+  border-style: solid;
+  border-color: orange;
+  position: relative;
+  left: 25px;
+  bottom: 5px;
+
 }
 
 .answerArea {
   position: relative;
-  top: 95px;
+  top: 5px;
   left: 147px;
+}
+
+.answerBlock:hover {
+  background-color: yellow;
 }
 
 .answerBlock {

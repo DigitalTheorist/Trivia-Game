@@ -30,16 +30,17 @@
 <div class="container-fluid main-container">
   <div class="container-fluid">
     <div class="row questionArea">
-      <div class="row timerArea">
-      </div><!--timerArea endtag-->
-    </div><!--questionArea endtag-->
+      </div><!--questionArea endtag-->
+        <div class="row timerArea"><h4 id="timerArea">00:00</h4></div><!--timerArea endtag-->
 
       <div class="row answerArea">
 
-        <div class="row answerBlock answer1"></div>
-        <div class="row answerBlock answer2"></div>
-        <div class="row answerBlock answer3"></div>
-        <div class="row answerBlock answer4"></div>
+        <button id="startButton" class="row startButton"><h4>Start</h4></button>
+
+        <button id="answer1" class="row answerBlock answer1"><p>answer1</p></button>
+        <button id="answer2" class="row answerBlock answer2"><p>answer2</p></button>
+        <button id="answer3" class="row answerBlock answer3"><p>answer3</p></button>
+        <button id="answer4" class="row answerBlock answer4"><p>answer4</p></button>
 
     </div><!--"answerArea endtag"-->
   </div><!--"row container endtag"-->
@@ -51,11 +52,7 @@
 
 
 
-
-
-
-
-  <!-- Latest compiled and minified JavaScript -->
+<!-- Latest compiled and minified JavaScript -->
   <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
