@@ -28,8 +28,9 @@
   position: relative;
   left: 33px;
   text-align: center;
-  font-size: 38px;
+  font-size: 32px;
   line-height: 200px;
+  word-wrap: break-word;
 }
 
 .timerArea {

@@ -3,7 +3,9 @@
   $(document).ready(function(){
 
 
-var trivaBucket = [ //make an array of object (in order to use a for loop)
+        //GLOBAL OBJECT
+    // ------------------------------------------
+    var triviaBucket = [
 
    {
     question: 'what color is the sky?',
@@ -39,73 +41,112 @@ var trivaBucket = [ //make an array of object (in order to use a for loop)
 
 ];
 
-var index = 0
-
-function incrementQuestion(){
-index++;
-console.log(index);
-};
-
-
-// This 'this' function pushes data to Q&A divs.
-// ------------------------------------------
-function populateQuestionArea(){
-  $(".questionArea").html(trivaBucket[index].question);
-  $("#answer1").html(trivaBucket[index].trueAnswer);
-  $("#answer2").html(trivaBucket[index].falseOne);
-  $("#answer3").html(trivaBucket[index].falseTwo);
-  $("#answer4").html(trivaBucket[index].falseThree);
-};
-populateQuestionArea();
-
-//GAME TIMER & START BUTTON
+      //GLOBAL VARIABLES
 //------------------------------------------
-$('#startButton').click(timer);
+  var clickSwitch = true
+  var index = 0
 
-    // function startButtonTimer () {
+  function incrementQuestion(){
+    index++;
+      };
+
+      //FUNCTION POPULATES QUESTIONAREA
+//------------------------------------------
+function populateQuestionArea(){
+
+  $(".questionArea").html(triviaBucket[index].question);
+  $("#1_1").html(triviaBucket[index].trueAnswer);
+  $("#1_2").html(triviaBucket[index].falseOne);
+  $("#1_3").html(triviaBucket[index].falseTwo);
+  $("#1_4").html(triviaBucket[index].falseThree);
+};
+
+      //START BUTTON AND TIMER FUNCTIONS
+//------------------------------------------
+      //START BUTTON
+//------------------------------------------
+$('#startButton').click(clickTimer);
+
+    console.log("clickswitch is now = " + clickSwitch)
+
+    function clickTimer () {
+
+    populateQuestionArea();
 
     var countDownTime = 10; //Countdown time.
     var counter = setInterval(timer, 1000)
 
-    function timer(){
-    countDownTime -= 1;
-    console.log("countDownTime is now = " + countDownTime)
+      function timer(){
+        countDownTime -= 1;
+        console.log("countDownTime is now = " + countDownTime)
 
-    $("#timerArea").html(countDownTime + " seconds left to answer!"); //display's time left to answer
+        $("#timerArea").html(countDownTime + " seconds left to answer!"); //display's time left to answer
 
-    if (countDownTime <= 0){
-    clearInterval(counter);
+        if (countDownTime <= 0 || clickSwitch === false ){
 
-    setTimeout(console.log("Time has run out! Next question!"));
+        clearInterval(counter);
+
+    // intervalTimer();
+
+        clickSwitch = true
     }
   }
-// }
+}
+
+    //INTERVAL TIMER FUNCTION
+//------------------------------------------
+function intervalTimer () {
+
+var intervalTime = 5; //Countdown time.
+var intervalCounter = setInterval(timer, 1000)
+
+  function timer(){
+  intervalTime -= 1;
+  console.log("intervalTime is now = " + intervalTime)
+
+  //dynamically display true/false answer screen here.
+  $("#timerArea").html("this is the interval timer!");
 
 
+    if (intervalTime <= 0){
+    clearInterval(intervalCounter);
+
+    console.log("Time has run out! Next question!");
+    }
+  }
+}
+//------------------------------------------
+
+      //ASWER BUTTON CLICK FUNCTION.
+//------------------------------------------
 $(document).on("click", ".answerBlock", function(){
   var $this = this;
 
-  console.log("this", this);
-
   var clickIdentifier = $(this).attr('id');
 
-  console.log("the answer button you clicked on returns " + clickIdentifier); //logs answer1 ect...
+  if (clickIdentifier === '1_1') {
+    // console.log('true!');
 
-  if (clickIdentifier === 'answer1') {
-    console.log('true!');
+    console.log(clickSwitch)
     incrementQuestion();
     populateQuestionArea();
+    clickSwitch = false;
+    clickTimer();
+    // intervalTimer();
   } else {
-    console.log('false');
+    // console.log('false');
+
     incrementQuestion();
     populateQuestionArea();
+    clickSwitch = false;
+    clickTimer();
+    // intervalTimer();
   }
-
-
-
 });
 
 
 
 
 }); //Document ready endtag.
+
+//------------------------------------------
