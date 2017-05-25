@@ -1,123 +1,111 @@
+
+
   $(document).ready(function(){
 
-          //GAME/TIMER START BUTTON
-//------------------------------------------
 
-$('#startButton').click(timerBlock);
+var trivaBucket = [ //make an array of object (in order to use a for loop)
 
-    function timerBlock () {
-    var count = 6;
-    var counter = setInterval(timer, 1000)
-
-    trivaBucket.answer1.operator1();
-
-    function timer(){
-    count -= 1;
-    console.log("count is now = " + count)
-
-    $("#timerArea").html(count + " seconds left to answer!");
-
-    if (count <= 0){
-    clearInterval(counter);
-    console.log("Ah! You didn't answer in time!")
-
-    }
-  }
-}
-
-
-
-    //This 'this' function pushes data to Q&A divs.
-//------------------------------------------
-var objectFunction = function () {
-  $(".questionArea").html(this.question);
-  $(".answer1").html(this.trueAnswer);
-  $(".answer2").html(this.falseOne);
-  $(".answer3").html(this.falseTwo);
-  $(".answer4").html(this.falseThree);
-};
-
-var trivaBucket = {
-
-  answer1: {
-    name: '#answer1',
+   {
     question: 'what color is the sky?',
-    trueAnswer: 'blue',
+    trueAnswer:'blue',
     falseOne: 'red',
     falseTwo: 'green',
     falseThree: 'violet',
-    operator1: objectFunction
-  },
+    },
 
-  answer2: {
-    name: '#answer2',
+  {
     question: 'San Francisco is in what State?',
     trueAnswer: 'California',
-    falseOne: 'Texas',
+    falseOne: 'Idaho',
     falseTwo: 'North Dakota',
     falseThree: 'Florida',
-    operator2: objectFunction
-  },
+    },
 
-  answer3: {
-    name: '#answer3',
+  {
     question: "In what city is Apple's Headquarters?",
     trueAnswer: 'Cupertino',
     falseOne: 'San Francisco',
-    falseTwo: 'Atlanta',
+    falseTwo: 'Houston',
     falseThree: 'Boston',
-    operator3: objectFunction
+    },
 
-  },
-
-  answer4: {
-    name: '#answer4',
+  {
     question: 'Is water wet?',
     trueAnswer: 'Yes',
     falseOne: 'no',
     falseTwo: 'what?',
-    falseThree: 'I need some coffee.',
-    operator4: objectFunction
-  }
+    falseThree: 'I need some coffee',
+    }
 
+];
+
+var index = 0
+
+function incrementQuestion(){
+index++;
+console.log(index);
 };
+
+
+// This 'this' function pushes data to Q&A divs.
+// ------------------------------------------
+function populateQuestionArea(){
+  $(".questionArea").html(trivaBucket[index].question);
+  $("#answer1").html(trivaBucket[index].trueAnswer);
+  $("#answer2").html(trivaBucket[index].falseOne);
+  $("#answer3").html(trivaBucket[index].falseTwo);
+  $("#answer4").html(trivaBucket[index].falseThree);
+};
+populateQuestionArea();
+
+//GAME TIMER & START BUTTON
 //------------------------------------------
-    //end object
+$('#startButton').click(timer);
+
+    // function startButtonTimer () {
+
+    var countDownTime = 10; //Countdown time.
+    var counter = setInterval(timer, 1000)
+
+    function timer(){
+    countDownTime -= 1;
+    console.log("countDownTime is now = " + countDownTime)
+
+    $("#timerArea").html(countDownTime + " seconds left to answer!"); //display's time left to answer
+
+    if (countDownTime <= 0){
+    clearInterval(counter);
+
+    setTimeout(console.log("Time has run out! Next question!"));
+    }
+  }
+// }
 
 
+$(document).on("click", ".answerBlock", function(){
+  var $this = this;
 
-    //attributes the id of the block to
-    //playGame (clickIdentifier); //pass the attributes of "this" to the function "playGame"
-//------------------------------------------
-  $(".answerBlock").on("click", function(){
+  console.log("this", this);
 
   var clickIdentifier = $(this).attr('id');
 
   console.log("the answer button you clicked on returns " + clickIdentifier); //logs answer1 ect...
-  playGame(clickIdentifier)
-});
-//------------------------------------------
-    // if () //TODO: If answer1 is clicked before timer ends move to "correct" screen
-//------------------------------------------
-  function playGame (clickIdentifier){
-  var chooseAnswer = trivaBucket[clickIdentifier]
 
-  console.log("Which is... " + chooseAnswer.trueAnswer);
-};
-//------------------------------------------
+  if (clickIdentifier === 'answer1') {
+    console.log('true!');
+    incrementQuestion();
+    populateQuestionArea();
+  } else {
+    console.log('false');
+    incrementQuestion();
+    populateQuestionArea();
+  }
+
+
+
+});
+
 
 
 
 }); //Document ready endtag.
-
-
-
-//TODO: display correct for 5 seconds
-
-//TODO: move to next questions
-
-//TODO: otherwise move to "nope" display
-
-//TODO: display incorrect for 5 seconds
-
-//TODO: move to next question

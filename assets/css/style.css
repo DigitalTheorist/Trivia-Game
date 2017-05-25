@@ -2,7 +2,7 @@
 
 .main-container {
   background-color: lightblue;
-  height: 600px;
+  height: 700px;
   width: 700px;
   border: solid;
   border-color: black;
@@ -27,6 +27,9 @@
   margin-top: 20px;
   position: relative;
   left: 33px;
+  text-align: center;
+  font-size: 38px;
+  line-height: 200px;
 }
 
 .timerArea {
@@ -39,6 +42,7 @@
   border-color: orange;
   position: relative;
   left: 158px;
+  margin-bottom: 10px;
 
 }
 .startButton:hover {
@@ -64,6 +68,7 @@
   position: relative;
   top: 5px;
   left: 147px;
+  font-size: 24px;
 }
 
 .answerBlock:hover {
