@@ -88,6 +88,7 @@ if (clickIdentifier === '1_1') {
 // console.log('true!');
 clickSwitch = false
 correct++;
+$("#wins").html("Correct " + correct);
 console.log(correct + " is the number of correct answers");
 incrementQuestion();
 populateQuestionArea();
@@ -97,6 +98,7 @@ timer();
 // console.log('false');
 clickSwitch = false
 incorrect++;
+$("#losses").html("Awww! " + incorrect);
 console.log(incorrect + " is the number of incorrect answers");
 incrementQuestion();
 populateQuestionArea();
@@ -111,7 +113,7 @@ timer();
 
       populateQuestionArea();
 
-      var countDownTime = 5; //Countdown time.
+      var countDownTime = 10; //Countdown time.
       var counter = setInterval(function(){
           console.log("clickSwitch is now "+ clickSwitch);
           countDownTime -= 1;
@@ -147,7 +149,7 @@ var intervalCounter = setInterval(intervalClock, 1000)
   console.log("intervalTime is now = " + intervalTime)
 
   //dynamically display true/false answer screen here.
-  $("#timerArea").html("this is the interval timer!");
+  $("#timerArea").html(intervalTime + " seconds until next question!");
 
     if (intervalTime <= 0){
     clearInterval(intervalCounter);

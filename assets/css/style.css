@@ -2,7 +2,7 @@
 
 .main-container {
   background-color: lightblue;
-  height: 700px;
+  height: 800px;
   width: 700px;
   border: solid;
   border-color: black;
@@ -63,6 +63,26 @@
   left: 25px;
   bottom: 5px;
 
+}
+
+#wins {
+  width: 100px;
+  height: 50px;
+  background-color: grey;
+  font-size: 14px;
+  text-align: center;
+  line-height: 50px;
+}
+
+#losses {
+  width: 100px;
+  height: 50px;
+  background-color: grey;
+  position: relative;
+  left: 85px;
+  font-size: 14px;
+  text-align: center;
+  line-height: 50px;
 }
 
 .answerArea {
