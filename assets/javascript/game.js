@@ -3,7 +3,7 @@
   $(document).ready(function(){
 
 
-        //GLOBAL OBJECT
+        //GLOBAL ARRAY OF OBJECTS
     // ------------------------------------------
     var triviaBucket = [
 
@@ -43,8 +43,10 @@
 
       //GLOBAL VARIABLES
 //------------------------------------------
-  var clickSwitch = true
+  var clickSwitch = true //BOOLEAN TO SWITCH QUESTIONS ON ANSWER CLICKS
   var index = 0
+  var correct = 0
+  var incorrect = 0
 
   function incrementQuestion(){
     index++;
@@ -60,89 +62,104 @@ function populateQuestionArea(){
   $("#1_3").html(triviaBucket[index].falseTwo);
   $("#1_4").html(triviaBucket[index].falseThree);
 };
-
-      //START BUTTON AND TIMER FUNCTIONS
 //------------------------------------------
-      //START BUTTON
+
+
+//START BUTTON
 //------------------------------------------
-$('#startButton').click(clickTimer);
+$('#startButton').on("click", function(){
 
-    console.log("clickswitch is now = " + clickSwitch)
+timer();
 
-    function clickTimer () {
+console.log("clickswitch is now = " + clickSwitch)
 
-    populateQuestionArea();
+});
+//------------------------------------------
 
-    var countDownTime = 10; //Countdown time.
-    var counter = setInterval(timer, 1000)
 
-      function timer(){
-        countDownTime -= 1;
-        console.log("countDownTime is now = " + countDownTime)
+//ASWER BUTTON CLICK FUNCTION.
+//------------------------------------------
+$(document).on("click", ".answerBlock", function(){
+var $this = this;
 
-        $("#timerArea").html(countDownTime + " seconds left to answer!"); //display's time left to answer
+var clickIdentifier = $(this).attr('id');
 
-        if (countDownTime <= 0 || clickSwitch === false ){
-
-        clearInterval(counter);
-
-    // intervalTimer();
-
-        clickSwitch = true
-    }
-  }
+if (clickIdentifier === '1_1') {
+// console.log('true!');
+clickSwitch = false
+correct++;
+console.log(correct + " is the number of correct answers");
+incrementQuestion();
+populateQuestionArea();
+timer();
+// intervalTimer();
+} else {
+// console.log('false');
+clickSwitch = false
+incorrect++;
+console.log(incorrect + " is the number of incorrect answers");
+incrementQuestion();
+populateQuestionArea();
+timer();
+// intervalTimer();
 }
+});
+
+    //TIME TO ANSWER FUNCTION
+//------------------------------------------
+      function timer () {
+
+      populateQuestionArea();
+
+      var countDownTime = 5; //Countdown time.
+      var counter = setInterval(function(){
+          console.log("clickSwitch is now "+ clickSwitch);
+          countDownTime -= 1;
+
+          if (countDownTime <= 0) {
+
+          clearInterval(counter);
+
+        } else if (countDownTime <= 0 || !clickSwitch) {
+
+          clearInterval(counter);
+          intervalTimer();
+          }
+
+          console.log("countDownTime is now = " + countDownTime);
+
+          $("#timerArea").html(countDownTime + " seconds left to answer!"); //display's time left to answer
+
+        }, 1000);
+      }
+//------------------------------------------
+
 
     //INTERVAL TIMER FUNCTION
 //------------------------------------------
 function intervalTimer () {
 
 var intervalTime = 5; //Countdown time.
-var intervalCounter = setInterval(timer, 1000)
+var intervalCounter = setInterval(intervalClock, 1000)
 
-  function timer(){
+  function intervalClock(){
   intervalTime -= 1;
   console.log("intervalTime is now = " + intervalTime)
 
   //dynamically display true/false answer screen here.
   $("#timerArea").html("this is the interval timer!");
 
-
     if (intervalTime <= 0){
     clearInterval(intervalCounter);
-
+    clickSwitch = true
+    timer();
     console.log("Time has run out! Next question!");
     }
   }
 }
 //------------------------------------------
 
-      //ASWER BUTTON CLICK FUNCTION.
-//------------------------------------------
-$(document).on("click", ".answerBlock", function(){
-  var $this = this;
 
-  var clickIdentifier = $(this).attr('id');
-
-  if (clickIdentifier === '1_1') {
-    // console.log('true!');
-
-    console.log(clickSwitch)
-    incrementQuestion();
-    populateQuestionArea();
-    clickSwitch = false;
-    clickTimer();
-    // intervalTimer();
-  } else {
-    // console.log('false');
-
-    incrementQuestion();
-    populateQuestionArea();
-    clickSwitch = false;
-    clickTimer();
-    // intervalTimer();
-  }
-});
 
 
 
